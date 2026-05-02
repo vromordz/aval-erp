@@ -426,6 +426,118 @@
     }
     .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
+    /* ── FORMULARIO ── */
+    .contact-section {
+      padding: 5rem 3rem;
+      background: var(--gris);
+      border-bottom: 0.5px solid #222;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .contact-info { padding-top: 0.5rem; }
+    .contact-info p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-top: 1rem;
+      max-width: 380px;
+    }
+    .contact-detail {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-detail-item { display: flex; flex-direction: column; gap: 2px; }
+    .contact-detail-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rojo);
+    }
+    .contact-detail-val {
+      font-size: 0.88rem;
+      color: var(--blanco);
+      font-weight: 500;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--gris2);
+      border: 0.5px solid #333;
+      color: var(--blanco);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--rojo); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select option { background: var(--gris2); }
+    .form-submit {
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      transition: opacity 0.2s;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { opacity: 0.85; }
+    .form-note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── BACK LINK ── */
+    .back-bar {
+      background: var(--negro);
+      border-bottom: 0.5px solid #222;
+      padding: 0.7rem 3rem;
+      display: flex;
+      align-items: center;
+    }
+    .back-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--blanco); }
+
     /* ── FOOTER ── */
     footer {
       padding: 2rem 3rem;
@@ -457,7 +569,10 @@
       .benefits { grid-template-columns: 1fr; }
       .ben-left { padding: 3rem 1.5rem; border-right: none; border-bottom: 0.5px solid #222; }
       .ben-right { padding: 3rem 1.5rem; }
-      .cta-section { padding: 3rem 1.5rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-section { padding: 3rem 1.5rem; }
+      .back-bar { padding: 0.7rem 1.5rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
       .strip { padding: 1rem 1.5rem; gap: 1.5rem; }
     }
@@ -471,10 +586,15 @@
     <ul class="nav-links">
       <li><a href="#modulos">Módulos</a></li>
       <li><a href="#beneficios">Beneficios</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#demo">Contacto</a></li>
     </ul>
-    <a href="#contacto" class="nav-cta">Solicitar Demo</a>
+    <a href="#demo" class="nav-cta">Solicitar Demo</a>
   </nav>
+
+  <!-- BACK BAR -->
+  <div class="back-bar">
+    <a href="https://avalmex.com" class="back-link">← Regresar a avalmex.com</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -483,7 +603,7 @@
       <h1 class="hero-title">Control total<br>desde el canal<br><span>hasta la caja.</span></h1>
       <p class="hero-sub">Producción, inventarios, despiece y rendimientos — todo integrado en un ERP diseñado exclusivamente para plantas cárnicas TIF en México.</p>
       <div class="hero-actions">
-        <a href="#contacto" class="btn-primary">Solicitar Demo →</a>
+        <a href="#demo" class="btn-primary">Solicitar Demo →</a>
         <a href="#modulos" class="btn-outline">Ver módulos</a>
       </div>
     </div>
@@ -650,14 +770,68 @@
     </div>
   </section>
 
-  <!-- CTA / CONTACTO -->
-  <section class="cta-section" id="contacto">
-    <div class="section-label">Comenzar</div>
-    <h2 class="cta-title">¿Tu planta lista<br>para el <span>siguiente nivel?</span></h2>
-    <p class="cta-sub">Habla con un especialista de AVAL MX. Te mostramos el sistema funcionando con datos reales de la industria cárnica.</p>
-    <div class="cta-buttons">
-      <a href="mailto:vromo@avalmex.com" class="btn-primary">Agendar demostración →</a>
-      <a href="https://wa.me/528715050753" class="btn-outline" target="_blank" rel="noopener">WhatsApp +52 871 505 0753</a>
+  <!-- DEMO / CONTACTO -->
+  <section class="contact-section" id="demo">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="section-label">Solicitar Demo</div>
+        <div class="section-title" style="margin-bottom:0;">Cuéntanos<br><span>de tu planta.</span></div>
+        <p>Un especialista de AVAL MX te contactará en menos de 24 horas hábiles para agendar una demostración con datos reales de la industria cárnica.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-item">
+            <span class="contact-detail-label">Correo</span>
+            <span class="contact-detail-val">vromo@avalmex.com</span>
+          </div>
+          <div class="contact-detail-item">
+            <span class="contact-detail-label">WhatsApp</span>
+            <span class="contact-detail-val">+52 871 505 0753</span>
+          </div>
+          <div class="contact-detail-item">
+            <span class="contact-detail-label">Horario</span>
+            <span class="contact-detail-val">Lun–Vie 8am–6pm CST</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/xaqvnlrk" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Nombre de la empresa" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="email" placeholder="tu@empresa.com" required />
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+52 871 000 0000" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tipo">Tipo de operación</label>
+          <select id="tipo" name="tipo">
+            <option value="">Selecciona...</option>
+            <option value="Planta TIF">Planta TIF</option>
+            <option value="Empacadora">Empacadora</option>
+            <option value="Distribuidora">Distribuidora</option>
+            <option value="Procesadora">Procesadora</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu operación..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Solicitar demostración →</button>
+        <p class="form-note">Tu información es confidencial y no será compartida con terceros.</p>
+      </form>
     </div>
   </section>
 
