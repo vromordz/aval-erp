@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AVAL ERP — El ERP de la industria cárnica mexicana</title>
+  <meta name="description" content="Software especializado para plantas TIF, empacadoras y distribuidoras. Producción, inventarios, despiece y rendimientos en una sola plataforma." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rojo: #C8102E;
+      --negro: #0A0A0A;
+      --blanco: #F5F3EE;
+      --gris: #1A1A1A;
+      --gris2: #2A2A2A;
+      --text-muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--negro);
+      color: var(--blanco);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-bottom: 0.5px solid #222;
+      position: sticky;
+      top: 0;
+      background: var(--negro);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--blanco);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--rojo); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      list-style: none;
+    }
+    .nav-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blanco); }
+    .nav-cta {
+      background: var(--rojo);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 5rem 3rem 4rem;
+      border-bottom: 0.5px solid #222;
+      position: relative;
+      overflow: hidden;
+      gap: 3rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 500px; height: 500px;
+      border: 0.5px solid #222;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 40px; top: 40px;
+      width: 300px; height: 300px;
+      border: 0.5px solid #1e1e1e;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      border: 0.5px solid #3a0a12;
+      padding: 0.4rem 1rem;
+      width: fit-content;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--rojo);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      color: var(--blanco);
+    }
+    .hero-title span { color: var(--rojo); }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+      font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--blanco);
+      border: 0.5px solid #444;
+      padding: 0.9rem 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: #888; }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* dashboard mock */
+    .dash-mock {
+      width: 100%;
+      max-width: 420px;
+      background: var(--gris);
+      border: 0.5px solid #2e2e2e;
+      padding: 1.25rem;
+    }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 0.5px solid #2e2e2e;
+    }
+    .dash-header-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .dash-dot { width: 6px; height: 6px; background: var(--rojo); border-radius: 50%; }
+    .dash-kpis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .kpi { background: var(--gris2); padding: 0.9rem 1rem; }
+    .kpi-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .kpi-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--blanco);
+      letter-spacing: 0.05em;
+    }
+    .kpi-value.red { color: var(--rojo); }
+    .dash-bar-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .bar-name { font-size: 0.65rem; color: var(--text-muted); width: 70px; }
+    .bar-track { flex: 1; height: 3px; background: #2e2e2e; }
+    .bar-fill { height: 3px; background: var(--rojo); }
+    .bar-val { font-size: 0.65rem; color: var(--blanco); width: 50px; text-align: right; }
+
+    /* ── STRIP ── */
+    .strip {
+      border-bottom: 0.5px solid #222;
+      padding: 1rem 3rem;
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      overflow-x: auto;
+    }
+    .strip-item {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .strip-sep { color: var(--rojo); font-size: 0.6rem; }
+
+    /* ── MODULES ── */
+    .modules { padding: 5rem 3rem; border-bottom: 0.5px solid #222; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.05em;
+      color: var(--blanco);
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+    .section-title span { color: var(--rojo); }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border: 0.5px solid #222;
+    }
+    .mod-card {
+      padding: 2rem;
+      border-right: 0.5px solid #222;
+      border-bottom: 0.5px solid #222;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+    .mod-card:nth-child(2n) { border-right: none; }
+    .mod-card:nth-child(3), .mod-card:nth-child(4) { border-bottom: none; }
+    .mod-card:hover { background: var(--gris); }
+    .mod-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: #1e1e1e;
+      line-height: 1;
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      pointer-events: none;
+      user-select: none;
+    }
+    .mod-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--blanco);
+      margin-bottom: 0.5rem;
+    }
+    .mod-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .mod-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 1rem; }
+    .tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 0.5px solid #333;
+      color: var(--text-muted);
+    }
+
+    /* ── BENEFITS ── */
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 0.5px solid #222;
+    }
+    .ben-left {
+      padding: 5rem 3rem;
+      border-right: 0.5px solid #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .ben-right { padding: 5rem 3rem; display: flex; align-items: center; }
+    .ben-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .ben-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .ben-check {
+      width: 16px; height: 16px;
+      border: 0.5px solid var(--rojo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .ben-check::after { content: ''; width: 6px; height: 6px; background: var(--rojo); }
+    .ben-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .ben-text strong { color: var(--blanco); font-weight: 500; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #1e1e1e;
+      width: 100%;
+    }
+    .stat-box { background: var(--negro); padding: 2.5rem 2rem; }
+    .stat-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--rojo);
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    .stat-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 5rem 3rem;
+      text-align: center;
+      background: var(--gris);
+      border-bottom: 0.5px solid #222;
+    }
+    .cta-section .section-label { text-align: center; }
+    .cta-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.05em;
+      color: var(--blanco);
+      margin-bottom: 1rem;
+      line-height: 1.05;
+    }
+    .cta-title span { color: var(--rojo); }
+    .cta-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 0.5px solid #222;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--blanco);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--rojo); }
+    .footer-copy { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; min-height: auto; gap: 3rem; }
+      .hero::before, .hero::after { display: none; }
+      .modules { padding: 3rem 1.5rem; }
+      .modules-grid { grid-template-columns: 1fr; }
+      .mod-card:nth-child(2n) { border-right: 0.5px solid #222; }
+      .mod-card { border-bottom: 0.5px solid #222 !important; border-right: none !important; }
+      .benefits { grid-template-columns: 1fr; }
+      .ben-left { padding: 3rem 1.5rem; border-right: none; border-bottom: 0.5px solid #222; }
+      .ben-right { padding: 3rem 1.5rem; }
+      .cta-section { padding: 3rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+      .strip { padding: 1rem 1.5rem; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="inicio">
+    <a href="#inicio" class="nav-logo">AVAL<span>.</span>ERP</a>
+    <ul class="nav-links">
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#beneficios">Beneficios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="#contacto" class="nav-cta">Solicitar Demo</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">ERP especializado · Planta cárnica TIF</div>
+      <h1 class="hero-title">Control total<br>desde el canal<br><span>hasta la caja.</span></h1>
+      <p class="hero-sub">Producción, inventarios, despiece y rendimientos — todo integrado en un ERP diseñado exclusivamente para plantas cárnicas TIF en México.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">Solicitar Demo →</a>
+        <a href="#modulos" class="btn-outline">Ver módulos</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="dash-mock">
+        <div class="dash-header">
+          <span class="dash-header-title">Rendimientos · turno actual</span>
+          <div class="dash-dot"></div>
+        </div>
+        <div class="dash-kpis">
+          <div class="kpi">
+            <div class="kpi-label">Canal entrada kg</div>
+            <div class="kpi-value">3,200</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Rendimiento %</div>
+            <div class="kpi-value red">76.4</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Merma kg</div>
+            <div class="kpi-value red">756</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Cortes obtenidos</div>
+            <div class="kpi-value">2,444</div>
+          </div>
+        </div>
+        <div class="dash-bar-label">Rendimiento por corte</div>
+        <div class="bar-row">
+          <span class="bar-name">Lomo</span>
+          <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+          <span class="bar-val">82.1%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Pierna</span>
+          <div class="bar-track"><div class="bar-fill" style="width:78%"></div></div>
+          <span class="bar-val">78.3%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Paleta</span>
+          <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
+          <span class="bar-val">71.0%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Costillar</span>
+          <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+          <span class="bar-val">65.5%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <span class="strip-item">Plantas TIF</span><span class="strip-sep">·</span>
+    <span class="strip-item">Empacadoras</span><span class="strip-sep">·</span>
+    <span class="strip-item">NOM-194</span><span class="strip-sep">·</span>
+    <span class="strip-item">HACCP</span><span class="strip-sep">·</span>
+    <span class="strip-item">Trazabilidad por lote</span><span class="strip-sep">·</span>
+    <span class="strip-item">CFDI 4.0</span><span class="strip-sep">·</span>
+    <span class="strip-item">Control de mermas</span>
+  </div>
+
+  <!-- MODULES -->
+  <section class="modules" id="modulos">
+    <div class="section-label">Módulos del sistema</div>
+    <div class="section-title">Cuatro pilares.<br><span>Un solo sistema.</span></div>
+    <div class="modules-grid">
+
+      <div class="mod-card">
+        <div class="mod-num">01</div>
+        <div class="mod-name">Producción</div>
+        <p class="mod-desc">Órdenes de producción, formulaciones y control de proceso por turno. Registro de entradas de canal, subproductos y trazabilidad completa por lote desde la recepción.</p>
+        <div class="mod-tags">
+          <span class="tag">Órdenes de producción</span>
+          <span class="tag">Formulaciones</span>
+          <span class="tag">Trazabilidad por lote</span>
+          <span class="tag">Control de turno</span>
+        </div>
+      </div>
+
+      <div class="mod-card">
+        <div class="mod-num">02</div>
+        <div class="mod-name">Inventarios</div>
+        <p class="mod-desc">Gestión de almacenes en tiempo real — cámaras de refrigeración, producto terminado, insumos y empaque. Alertas de stock mínimo, caducidades y movimientos auditables.</p>
+        <div class="mod-tags">
+          <span class="tag">Multi-almacén</span>
+          <span class="tag">Caducidades</span>
+          <span class="tag">Alertas automáticas</span>
+          <span class="tag">Kardex</span>
+        </div>
+      </div>
+
+      <div class="mod-card">
+        <div class="mod-num">03</div>
+        <div class="mod-name">Despiece</div>
+        <p class="mod-desc">Control detallado de cortes por canal, especie y categoría. Registro de piezas obtenidas, peso por corte, destino (proceso, venta, subproducto) y comparativa contra estándar.</p>
+        <div class="mod-tags">
+          <span class="tag">Cortes por canal</span>
+          <span class="tag">Piezas obtenidas</span>
+          <span class="tag">Destino de corte</span>
+          <span class="tag">Vs. estándar</span>
+        </div>
+      </div>
+
+      <div class="mod-card">
+        <div class="mod-num">04</div>
+        <div class="mod-name">Rendimientos</div>
+        <p class="mod-desc">Análisis de rendimiento real vs. esperado por especie, línea y operador. Control de mermas, hueso, grasa y subproductos. Reportes por turno, semana y mes para toma de decisiones.</p>
+        <div class="mod-tags">
+          <span class="tag">Real vs. esperado</span>
+          <span class="tag">Control de mermas</span>
+          <span class="tag">Reportes por turno</span>
+          <span class="tag">Por especie</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="beneficios">
+    <div class="ben-left">
+      <div class="section-label">Por qué AVAL ERP</div>
+      <div class="section-title" style="margin-bottom:0;">Hecho para<br><span>la cárnica.</span></div>
+      <ul class="ben-list">
+        <li class="ben-item">
+          <div class="ben-check"></div>
+          <span class="ben-text"><strong>100% especializado en TIF.</strong> No es un ERP genérico adaptado — fue construido desde cero para plantas de proceso cárnico.</span>
+        </li>
+        <li class="ben-item">
+          <div class="ben-check"></div>
+          <span class="ben-text"><strong>Rendimientos en tiempo real.</strong> Compara el rendimiento real de cada canal contra tu estándar antes de que termine el turno.</span>
+        </li>
+        <li class="ben-item">
+          <div class="ben-check"></div>
+          <span class="ben-text"><strong>Trazabilidad total.</strong> Del animal en pie al producto terminado. Lotes, mermas, cortes y movimientos en un solo registro.</span>
+        </li>
+        <li class="ben-item">
+          <div class="ben-check"></div>
+          <span class="ben-text"><strong>Implementación acompañada.</strong> El equipo de AVAL MX te guía desde la configuración inicial hasta la operación diaria.</span>
+        </li>
+      </ul>
+    </div>
+    <div class="ben-right">
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-n">TIF</div>
+          <div class="stat-desc">Cumplimiento normativo</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">NOM</div>
+          <div class="stat-desc">194 · HACCP integrado</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">100%</div>
+          <div class="stat-desc">Industria cárnica</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">MX</div>
+          <div class="stat-desc">Soporte en español</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACTO -->
+  <section class="cta-section" id="contacto">
+    <div class="section-label">Comenzar</div>
+    <h2 class="cta-title">¿Tu planta lista<br>para el <span>siguiente nivel?</span></h2>
+    <p class="cta-sub">Habla con un especialista de AVAL MX. Te mostramos el sistema funcionando con datos reales de la industria cárnica.</p>
+    <div class="cta-buttons">
+      <a href="mailto:vromo@avalmex.com" class="btn-primary">Agendar demostración →</a>
+      <a href="https://wa.me/528715050753" class="btn-outline" target="_blank" rel="noopener">WhatsApp +52 871 505 0753</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#inicio" class="footer-logo">AVAL<span>.</span>ERP</a>
+    <span class="footer-copy">© 2026 AVAL MX · erp.avalmex.com</span>
+  </footer>
+
+</body>
+</html>
